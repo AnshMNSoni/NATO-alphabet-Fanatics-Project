@@ -1,8 +1,17 @@
 import pandas as pd
 
-file = pd.read_csv('./NATO-alphabet-Fanatics-project/data.csv')
+file = pd.read_csv('data.csv')
 
-name = input('Enter your name here:').upper()
+def phonetics():
+    try:
+        name = input('Enter your name here:').upper()
+        fanatics = [file['code'][ord(ch) - 65] for ch in name]
+        
+    except KeyError:
+        print('Sorry! only letters in the alphabet please!')
+        phonetics()
+    
+    else:
+        print(fanatics)
 
-fanatics = [file['code'][ord(ch) - 65] for ch in name]
-print(fanatics)
+phonetics()
